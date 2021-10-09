@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake And ladder</title>
+    
+    <style>
+      body{
+        background-color: black;
+      }
+        :root {
+  --ticker-color: transparent;
+  
+  --board-green: #ff1313;
+  
+  --board-blue: #1b4152;
+  --board-off-white: #f8f8ff;
+  --zIndex-1: 10;
+  --zIndex-2: 100;
+}
+.section {
+  width: 110vmin;
+  height: 20vmin;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 9fr 1fr;
+  grid-gap: 20px;
+}
+
+.board {
+  width: 98vmin;
+  
+  margin: 0;
+  border: 1px solid black;
+  display: grid;
+  grid-template: repeat(10, 70px) / repeat(10, 70px);
+  position: absolute;
+}
+
+.board-item {
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 24px;
+  z-index: 100;
+}
+
+.board-item:nth-child(4n + 1) {
+  background-color: rgb(34, 172, 6);
+  transition: ease-in-out;
+}
+.board-item:nth-child(4n + 1):hover {
+  background-color: rgb(69, 255, 32);
+  box-shadow:  0 0 10px rgb(51, 209, 11), 0 0 10px rgb(51, 209, 11), 0 0 10px rgb(51, 209, 11), 0 0 10px rgb(51, 209, 11);
+}
+.board-item:nth-child(3n + 1) {
+  background-color: rgb(143, 29, 29);
+}
+.board-item:nth-child(3n + 1):hover {
+  background-color: var(--board-green);
+  box-shadow:  0 0 10px var(--board-green), 0 0 10px var(--board-green), 0 0 10px var(--board-green), 0 0 10px var(--board-green);
+}
+.board-item:nth-child(3n + 2) {
+  background-color: var(--board-blue);
+}
+.board-item:nth-child(3n + 2):hover {
+  background-color: rgb(32, 103, 255);
+  box-shadow:  0 0 10px rgb(6, 80, 190), 0 0 10px rgb(6, 80, 190), 0 0 10px rgb(6, 80, 190), 0 0 10px rgb(6, 80, 190);
+}
+.board-item:nth-child(3n + 3) {
+  background-color: rgb(34, 172, 6);
+  transition: ease-in-out;
+}
+.board-item:nth-child(3n + 3):hover {
+  background-color: rgb(69, 255, 32);
+  box-shadow:  0 0 10px rgb(51, 209, 11), 0 0 10px rgb(51, 209, 11), 0 0 10px rgb(51, 209, 11), 0 0 10px rgb(51, 209, 11);
+}
+.Section img{
+position: absolute;
+}
+#S1,
+#S2,
+#S3,
+#S4,
+#S5,
+#S6,
+#S7,
+#S8 {
+  z-index: var(--zIndex-2);
+  
+}
+
+#S1 { 
+     grid-column: 8;
+    grid-row: 2;
+    width: 228px;
+    transform: rotate( 
+13deg);
+    transform: rotate( 
+41deg);
+}
+#S2 {
+
+  grid-column: 4;
+    grid-row: 6;
+    transform: rotate( 
+80deg);
+}
+
+#S3 {
+  
+  width: 71px;
+    grid-column: 2;
+    grid-row: 2;
+    transform: rotate( 
+-49deg);
+}
+#S5 {
+  grid-column: 4;
+    grid-row: 2;
+    transform: rotate( 
+-83deg);
+    height: 108px;
+}
+#S6 {
+  grid-column: 2;
+    grid-row: 1;
+    transform: rotate( 
+5deg);
+    width: 162px;
+    height: 678px;
+
+}
+
+#S8 {
+  grid-column: 6;
+    grid-row: 6;
+    transform: rotate( 
+356deg);
+    width: 259px;
+}
+#S7 {
+  grid-column: 1;
+    grid-row: 7;
+    width: 108px;
+    transform: rotate(
+-1deg);
+}
+
+#l1 {height: 222px;
+    grid-column: 7;
+    grid-row: 2;
+    transform: rotate(
+-41deg);
+    z-index: var(--zIndex-2);
+}
+
+#l2 {
+  height: 200px;
+  grid-column: 4;
+  grid-row: 5;
+  transform: rotate(-44deg);
+  z-index: var(--zIndex-2);
+}
+
+#l3 {
+  
+  height: 511px;
+    width: 49px;
+    grid-column: 5;
+    transform: rotate( 
+-33deg);
+    grid-row: 1;
+    z-index: var(--zIndex-2);
+}
+
+#l4 {
+    height: 221px;
+    grid-column: 2;
+    transform: rotate( 
+43deg);
+    grid-row: 3;
+    z-index: var(--zIndex-2);
+
+}
+#l5 {
+  
+  height: 214px;
+    width: 39px;
+    grid-column: 5;
+    transform: rotate(
+47deg);
+    grid-row: 8;
+    z-index: var(--zIndex-2);
+}
+
+#l7 {height: 272px;
+    width: 46px;
+    grid-column: 9;
+    transform: rotate(
+151deg);
+    grid-row: 7;
+    z-index: var(--zIndex-2);
+}
+
+#l8 {
+  height: 210px;
+    width: 40px;
+    grid-column: 9;
+    grid-row: 1;
+    transform: rotate(
+-41deg);
+    z-index: var(--zIndex-2);
+}
+.players {
+  display: flex;
+  justify-content: space-between;
+  width: 20vw;
+  margin: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.move-ticker {
+  
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--ticker-color);
+  
+}
+.button {
+  cursor: pointer;
+ 
+  border: 0.1vmin solid;
+  background-color: blue;
+  color: white;
+  padding: 40px 10px;
+  font-size: 1.5rem;
+}
+
+.button-1 {
+  border-color: red;
+  background-color: rgb(18, 64, 90);
+  transition: 0.2s ease-in-out;
+}
+.button-1:hover{
+  background-color: rgb(30, 171, 253);
+  box-shadow:  0 0 40px rgb(30, 171, 253), 0 0 40px rgb(30, 171, 253), 0 0 40px rgb(30, 171, 253), 0 0 40px rgb(30, 171, 253);
+}
+.button-2 {
+  border-color: rgb(6, 8, 6);
+  background-color: rgb(8, 97, 8);
+  transition: 0.2s ease-in-out;
+}
+.button-2:hover{
+  background-color: rgb(48, 168, 18);
+  box-shadow:  0 0 40px rgb(51, 209, 11), 0 0 40px rgb(51, 209, 11), 0 0 40px rgb(51, 209, 11), 0 0 40px rgb(51, 209, 11);
+}
+.button-1.disabled,
+.button-2.disabled {
+  cursor: no-drop;
+  pointer-events: none;
+  border-color: gray;
+  background-color: gray;
+}
+#ludo{
+            position: absolute;
+            bottom: 1vmin;
+            left: 25vmin;
+            height: 13vmin;
+            width: 18vmin;
+            border: 0.2vmin solid black;
+            color: white;
+            font-weight: bold;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background-color: rgb(180, 14, 14);
+            text-align: center;
+            font-size: 2.5vmin;
+
+        }
+        #cubeOutter{
+            height: 8vmin;
+            width: 8vmin;
+            perspective: 30vmin;
+            margin: auto;
+        }
+        #cubeInner{
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: all 0.75s linear;
+        }
+        #cubeInner div{
+           height: 100%;
+           width: 100%;
+           position: absolute;
+        }
+        #front{
+            transform: translateZ(4vmin);
+        }
+        #back{
+            transform: rotateY(180deg) translateZ(4vmin);
+        }
+        #left{
+            transform: rotateY(-90deg) translateX(-4vmin);
+            transform-origin: left;
+        }
+        #right{
+            transform: rotateY(90deg) translateX(4vmin);
+            transform-origin: right;
+        }
+        #top{
+            transform: rotateX(-90deg) translateY(-4vmin);
+            transform-origin: top;
+        }
+        #bottom{
+            transform: rotateX(90deg) translateY(4vmin);
+            transform-origin: bottom;
+        }
+       #cubeInner img{
+            height: 100%;
+            width: 100%;
+        }
+      #won{
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+      #wonx{
+        display:none;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      </style>
+</head>
+<body>
+  
+  <div id="won">
+    <video width="320" height="240"  autoplay loop>
+      <source src="oggy.mp4" type="video/mp4">
+     
+    </video>
+   </div>
+   <div id="wonx">
+   <img src="pngwing.com (33).png" alt="">
+   </div>
+    <div class="section">
+      
+        <div class="board">
+          <div class="board-item board-item-100">100
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-99">99
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-98">98
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-97">97
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-96">96
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-95">95
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-94">94
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-93">93
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-92">92
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-91">91
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-81">81
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-82">82
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-83">83
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-84">84
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-85">85
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-86">86
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-87">87
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-88">88
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-89">89
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-90">90
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-80">80
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-79">79
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-78">78
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-77">77
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-76">76
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-75">75
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-74">74
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-73">73
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-72">72
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-71">71
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-61">61
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-62">62
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-63">63
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-64">64
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-65">65
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-66">66
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-67">67
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-68">68
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-69">69
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-70">70
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-60">60
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-59">59
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-58">58
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-57">57
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-56">56
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-55">55
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-54">54
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-53">53
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-52">52
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-51">51
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-41">41
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-42">42
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-43">43
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-44">44
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-45">45
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-46">46
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-47">47
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-48">48
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-49">49
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-50">50
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-40">40
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-39">39
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-38">38
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-37">37
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-36">36
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-35">35
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-34">34
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-33">33
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-32">32
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-31">31
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-21">21
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-22">22
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-23">23
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-24">24
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-25">25
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-26">26
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-27">27
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-28">28
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-29">29
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-30">30
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-20">20
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-19">19
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-18">18
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-17">17
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-16">16
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-15">15
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-14">14
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-13">13
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-12">12
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-11">11
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-1">1
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-2">2
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-3">3
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-4">4
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-5">5
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-6">6
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-7">7
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-8">8
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-9">9
+            <span class="move-ticker"></span>
+          </div>
+          <div class="board-item board-item-10">10
+            <span class="move-ticker"></span>
+          </div>
+        </div>
+        <div class="board board-background">
+            <div class="player" id="red"></div>
+            <div class="player" id="blue"></div>
+            <img src="l2.png" alt="" id="l1">
+            <img src="l2.png" alt="" id="l2">
+            <img src="l2.png" alt="" id="l3">
+            <img src="l2.png" alt="" id="l4">
+            <img src="l2.png" alt="" id="l5">
+           
+            <img src="l2.png" alt="" id="l7">
+            <img src="l2.png" alt="" id="l8">
+            
+            <img src="snake-2.png" alt="" id="S1">
+            <img src="s2.png" alt="" id="S2">
+            <img src="snake-3.png" alt="" id="S3">
+            
+            <img src="s5.png" alt="" id="S5">
+            <img src="snake-4.png" alt="" id="S6">
+           <img src="s21.png" alt="#S7" id="S7">
+            <img src="snake-5.png" alt="" id="S8">
+        </div>
+        <div class="dice-result-container">
+          <span class="js-dice-result dice-result"></span>
+        </div>
+        <div id="ludo">
+          <span class=".js-dice-result">Dice</span>
+          <div id="cubeOutter">
+            <div id="cubeInner">
+              <div id="front"> <img src="./svg/d1.png" alt=""> </div>
+              <div id="back"><img src="./svg/d2.png" alt=""></div>
+              <div id="left"><img src="./svg/d3.png" alt=""></div>
+              <div id="right"><img src="./svg/d4.png" alt=""></div>
+              <div id="top"><img src="./svg/d5.png" alt=""></div>
+              <div id="bottom"><img src="./svg/d6.png" alt=""></div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="players">
+      <button class="button button-1 js-button-1" onClick="SnakeAndLadderBoard.playerOne()">OGGY</button>
+      <button class="button button-2 js-button-2" onClick="SnakeAndLadderBoard.playerTwo()">JACK</button>
+    </div>
+
+    
+    <script >
+    
+      var SnakeAndLadderBoard = (function() {
+        function rollDice(){
+        
+            let dice = Math.floor(Math.random()*6)+ 1;
+        let val = [[0,-360],[-180,-360],[-180,270],[0,-90],[270,180],[90,90]];
+        new Audio('dc.mp3').play();
+        document.querySelector('#cubeInner').style.transform = 'rotateX(360deg) rotateY(360deg)';
+    
+        document.querySelector('#cubeInner').style.transform = `rotateX(${val[dice - 1][0]}deg) rotateY(${val[dice - 1][1]}deg)`
+        return dice
+      }
+      var playerOneScore = 0,
+        playerTwoScore = 0;
+    
+        
+      function checkScoreGreaterThan100(score, number) {
+        if (score + number > 100) {
+          score;
+        } else {
+          score = score + number;
+        }
+        return score;
+      }
+    
+      function getScoreOnSnakeAndLadder(score) {
+        switch (score) {
+          case 4:
+            score = 26;
+            new Audio('move.mp3').play();
+            break;
+          case 10:
+            score = 33;
+            new Audio('move.mp3').play();
+            break;
+          case 34:
+            score = 98;
+            new Audio('move.mp3').play();
+            break;
+          case 36:
+            score = 58;
+            new Audio('move.mp3').play();
+            break;
+          case 40:
+            score = 19;
+            new Audio('food.mp3').play();
+            break;
+          case 49:
+            score = 6;
+            new Audio('food.mp3').play();
+            break;
+          case 71:
+            score = 93;
+            new Audio('move.mp3').play();
+            break;
+          case 54:
+            score =25;
+            new Audio('food.mp3').play();
+            break;
+          case 60:
+            score = 78;
+            new Audio('move.mp3').play();
+            break;
+          case 99:
+            score = 3;
+            new Audio('food.mp3').play();
+            break;
+            case 81:
+              score = 63;
+              new Audio('food.mp3').play();
+              break;
+              case 68:
+                score = 86;
+                new Audio('move.mp3').play();
+            break;
+            case 96:
+              score = 65;
+              new Audio('food.mp3').play();
+              break;
+             case 92:
+                score = 52;
+                new Audio('food.mp3').play();
+                break;
+               
+        }
+        return score;
+      }
+      
+      function showActiveInactivePlayer(active, inactive) {
+        const buttonOne = document.querySelector(".js-button-1");
+        const buttonTwo = document.querySelector(".js-button-2");
+        if (active === 1) {
+          buttonTwo.classList.add("disabled");
+          buttonOne.classList.remove("disabled");
+        } else {
+          buttonOne.classList.add("disabled");
+          buttonTwo.classList.remove("disabled");
+        }
+      }
+    
+      function getActivePlayer(number, playerNumber) {
+        let active = number === 6 ? playerNumber : playerNumber % 2 + 1;
+        let inactive = active % 2 + 1;
+    
+        return { active, inactive };
+      }
+      
+      function clearPreviousPosition(score) {
+        if (score > 0) {
+          let getBoardItem = `.board-item-${score}`;
+          return document
+          .querySelector(getBoardItem)
+          .style.setProperty("--ticker-color", "transparent");
+        }
+      }
+      
+      function playerOne() {
+        
+        const number = rollDice();
+        
+        
+        clearPreviousPosition(playerOneScore);
+        
+      
+        let { active, inactive } = getActivePlayer(number, 1);
+        showActiveInactivePlayer(active, inactive);
+        
+    
+        document.querySelector(".js-dice-result").innerHTML = number + "OGGY";
+    
+        playerOneScore = checkScoreGreaterThan100(playerOneScore, number);
+        playerOneScore = getScoreOnSnakeAndLadder(playerOneScore);
+    
+        if (playerOneScore === 100) {
+          document.getElementById("won").style.display = "flex";
+          alert("OGGY IS WINNER")
+        } else {
+          let getNewBoardItem = `.board-item-${playerOneScore}`;
+          document
+            .querySelector(getNewBoardItem)
+            .style.setProperty("--ticker-color", "rgb(15, 148, 224)");
+            new Audio('oggy.mp3').play();
+          }
+        }
+        
+        function playerTwo() {
+          
+          const number = rollDice();
+          
+        
+          clearPreviousPosition(playerTwoScore);
+          
+    
+        let { active, inactive } = getActivePlayer(number, 2);
+        showActiveInactivePlayer(active, inactive);
+        
+      
+        document.querySelector(".js-dice-result").innerHTML = number + "JACK";
+        
+        playerTwoScore = checkScoreGreaterThan100(playerTwoScore, number);
+        playerTwoScore = getScoreOnSnakeAndLadder(playerTwoScore);
+        
+        if (playerTwoScore === 100) {
+          document.getElementById("wonx").style.display = "flex";
+          alert("JACK IS WINNER")
+        } else {
+          let getNewBoardItem = `.board-item-${playerTwoScore}`;
+          document
+          .querySelector(getNewBoardItem)
+            .style.setProperty("--ticker-color", "green");
+            new Audio('jack.mp3').play();
+        }
+      }
+      
+    
+      return { playerOne, playerTwo };
+    })();
+    
+  </script>
+</body>
+</html>
