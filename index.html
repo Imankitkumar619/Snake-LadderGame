@@ -332,12 +332,32 @@ position: absolute;
         align-items: center;
         justify-content: center;
       }
+        
+      #won video{
+        height: 100vh;
+        width: 100vh;
+      }
       #wonx{
         display:none;
         align-items: center;
         justify-content: center;
       }
-      
+        
+      #wonx video{
+        height: 100vh;
+        width: 100vh;
+      }
+        @media (max-width:900px){
+    #ludo{
+      bottom: -7vmin;
+      left: 30vmin;
+    }
+    .players{
+      width: 67vw;
+    /* margin-top: 527px; */
+    padding-top: 45rem;
+    }
+      }
       </style>
 </head>
 <body>
@@ -844,7 +864,7 @@ position: absolute;
           document
             .querySelector(getNewBoardItem)
             .style.setProperty("--ticker-color", "rgb(15, 148, 224)");
-            new Audio('oggy.mp3').play();
+            new Audio('ow.mp3').play();
           }
         }
         
@@ -873,7 +893,7 @@ position: absolute;
           document
           .querySelector(getNewBoardItem)
             .style.setProperty("--ticker-color", "green");
-            new Audio('jack.mp3').play();
+             new Audio('jw.mp3').play();
         }
       }
       
